@@ -1,19 +1,258 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfólio pessoal e projetos de pesquisa.">
+<title>Larissa Viana | Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fcfbfa;
+    --text: #2b2d42;
+    --text-dim: #6c757d;
+    --card-bg: #ffffff;
+    --accent: #e07a5f;
+    --accent-dim: #f4f1de;
+    --border: #eae6df;
+  }
+
+  * { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.6;
+    padding: 80px 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ---- Header ---- */
+  header {
+    margin-bottom: 40px;
+  }
+
+  .profile-title {
+    font-family: 'Lora', serif;
+    font-weight: 500;
+    font-size: 2.2rem;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .profile-subtitle {
+    font-size: 1rem;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .institution-tag {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ---- Navegação por Abas ---- */
+  .tabs-nav {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding-bottom: 12px;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .tab-btn:hover {
+    color: var(--text);
+  }
+
+  .tab-btn.active {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -13px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+  }
+
+  /* ---- Conteúdo das Abas ---- */
+  .tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  section {
+    margin-bottom: 48px;
+  }
+
+  h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  p {
+    color: #4a4e69;
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+  }
+
+  .empty-state {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    font-style: italic;
+    background: var(--card-bg);
+    border: 1px dashed var(--border);
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  /* ---- Links / Contato ---- */
+  .links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .links-list a {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    width: fit-content;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .links-list a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 48px 20px; }
+    .profile-title { font-size: 1.8rem; }
+    .tabs-nav { gap: 24px; }
+  }
+</style>
 </head>
 <body>
 
+  <div class="container">
+
     <header>
-        <h1>Larissa Viana de Sousa</h1>
+      <h1 class="profile-title">Larissa Viana</h1>
+      <p class="profile-subtitle">
+        Ciência da Computação <span class="institution-tag">IME-USP</span>
+      </p>
     </header>
 
+    <nav class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('inicio')">Início</button>
+      <button class="tab-btn" onclick="switchTab('projetos')">Projetos</button>
+    </nav>
+
     <main>
-        <section class="content">
-            <h2>Sobre mim</h2>
+      
+      <div id="tab-inicio" class="tab-content active">
+        <section>
+          <p>
+            Sobre as diferentes trilhas do BCC-IME/USP, eu achei a trilha de Teoria da Computação muito interessate pela minha forte afinidade com matemática, mas tenho o interesse de trabalhar com algo parecido com a minha IC, que é da parte de Visão Computacional (trilha de IA) e manipulação de dados (trilha de Ciência de Dados e Machine Learning). Pretendo ter uma graduação diversa, com o objetivo de atender meus multiplos interesses.
+          </p>
+          <p>
+            Atualmente, estou em um projeto de pesquisa focado em melhoria de calçadas por meio de análise multimodal de dados e visão computacional com o app SideSeeing.
+          </p>
         </section>
-    </
+
+        <section>
+          <h2>Contato</h2>
+          <ul class="links-list">
+            <li><a href="https://github.com/Larivs1" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://linkedin.com/in/larissa-viana-de-sousa-6152a4386?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="mailto:larissavsousa@usp.br">E-mail pessoal</a></li>
+          </ul>
+        </section>
+      </div>
+
+      <div id="tab-projetos" class="tab-content">
+        <section>
+          <h2>Projetos em Destaque</h2>
+          <p class="empty-state">Sem projetos ainda</p>
+        </section>
+      </div>
+
+    </main>
+
+    
+
+  </div>
+
+  <script>
+    function switchTab(tabName) {
+      // Remove a classe active de todas as abas e botões
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      // Adiciona a classe active na aba e no botão selecionados
+      document.getElementById('tab-' + tabName).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
